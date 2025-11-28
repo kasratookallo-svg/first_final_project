@@ -52,6 +52,9 @@ def receive_data():
         reset_table()
     except Exception as e:
         messagebox.showerror("Error", f"Something went wrong:{e}")
+#------------------------------------------------------------------------------------
+# Database Handling
+#todo Database has malfunction
 
 def save_click():
     status , message = LessonController.save(
@@ -79,7 +82,6 @@ def edit_click():
     else:
         messagebox.showerror("Edition Error", message)
 
-
 def remove_click():
     status, message = LessonController.remove()
     if status:
@@ -100,12 +102,12 @@ Window.geometry("400x500")
 Window.configure(bg="green")
 
 # Entry 1
-Label(Window, text="Lesson Name ").place(x=10, y=100)
+Label(Window, text="Lesson Name").place(x=10, y=100)
 lesson_name = StringVar()
 Entry(Window, textvariable=lesson_name).place(x=100, y=100)
 
 # Entry 2
-Label(Window, text="Lesson Code   ").place(x=10, y=150)
+Label(Window, text="Lesson Code").place(x=10, y=150)
 lesson_code = IntVar()
 Entry(Window, textvariable=lesson_code).place(x=100, y=150)
 
@@ -119,7 +121,7 @@ Label(Window, text="Lesson Credits").place(x=10, y=250)
 lesson_credits = IntVar()
 Entry(Window, textvariable=lesson_credits).place(x=100, y=250)
 
-Button(Window, text="Save", command=receive_data , width=53).place(x=10, y=300)
+Button(Window, text="Save", command=save_click , width=53).place(x=10, y=300)
 Button(Window, text="Edit", command=edit_click, width=53).place(x=10, y=350)
 Button(Window, text="Delete", command=remove_click, width=53).place(x=10, y=400)
 Button(Window, text="Total Credits", command=total_credits , width=53).place(x=10, y=450)

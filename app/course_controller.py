@@ -7,16 +7,22 @@ from lesson_model import Curriculum
 
 class LessonController:
     @staticmethod
-    def save(self, lesson_code, lesson_name, teacher_name, lesson_credits):
+    def save(lesson_name, lesson_code, teacher_name, lesson_credits):
         try:
-            curiculum = Curriculum(lesson_code, lesson_name, teacher_name, lesson_credits)
+            curiculum = Curriculum(
+                lesson_name,
+                lesson_code,
+                teacher_name,
+                lesson_credits
+                 )
             curiculum_da = CurriculumDataAccess()
             curiculum_da.save(curiculum)
             return True , "Lesson Saved Successfully in Database."
         except Exception as e:
             return False , "Lesson saving Error !!!!"
+
     @staticmethod
-    def edit(self, lesson_code, lesson_name, teacher_name, lesson_credits):
+    def edit(lesson_code, lesson_name, teacher_name, lesson_credits):
         try:
             curiculum = Curriculum(lesson_code, lesson_name, teacher_name, lesson_credits)
             curiculum_da = CurriculumDataAccess()
@@ -35,7 +41,7 @@ class LessonController:
             return False , f"Lesson Removal Error : {e}"
 
     @staticmethod
-    def find_all(self):
+    def find_all():
         try:
             curriculum_da = CurriculumDataAccess()
             return True , curriculum_da.find_all()
