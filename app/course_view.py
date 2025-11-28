@@ -26,10 +26,10 @@ def reset_table():
 #                                               Getting Lesson Data
 def select_lesson(event):
     lesson = table.item(table.focus())["values"]
-    lesson_name = (lesson[0])
-    lesson_code = (lesson[1])
-    teacher_name = (lesson[2])
-    lesson_credits = (lesson[3])
+    lesson_name.set(lesson[0])
+    lesson_code.set(lesson[1])
+    teacher_name.set(lesson[2])
+    lesson_credits.set(lesson[3])
 
 study_list = []
 def receive_data():
