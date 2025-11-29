@@ -3,7 +3,7 @@
 # 11/28/2025
 #------------------------------------------------------------------------------------------
 from curriculum_dao import CurriculumDataAccess
-from lesson_model import Curriculum
+from product_model import Curriculum
 
 class LessonController:
     @staticmethod
