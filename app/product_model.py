@@ -7,12 +7,13 @@ import re
 from datetime import date, datetime
 import pickle
 
-#product_list = []
+product_list = []
+
 #--------------------------------------------------------------------------------------------------
 # First approach : Class
 class Product :
-    def __init__(self, product_id , name, brand , quantity ,  price , expire_date):
-        self.product_id = product_id
+    def __init__(self, id , name, brand , quantity ,  price ,expire_date):
+        self.product_id = id
         self.name = name
         self.brand = brand
         self.quantity = quantity
@@ -79,7 +80,7 @@ def expire_validator(expire_date):
     if type(expire_date) != date and expire_date >= date.today():
         raise ValueError("Expiration date must be YYYY-MM-DD.")
 
-def creat_products_and_validate(id_number ,name , brand , quantity , price , expiration_date):
+def creat_products_and_validate(id ,name , brand , quantity , price , expiration_date):
     #id_validator(id_number)
     name_validator(name)
     brand_validator(brand)
@@ -90,7 +91,7 @@ def creat_products_and_validate(id_number ,name , brand , quantity , price , exp
     expire_validator(expire_date)
 
     product = {
-        "id_number": id_number,
+        "id_number": id,
         "name": name,
         "brand": brand,
         "quantity": quantity,

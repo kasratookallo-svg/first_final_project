@@ -9,6 +9,7 @@ from tkinter import *
 from tkinter import messagebox
 from product_model import *
 from tkinter import ttk
+from product_controller import *
 
 product_list = []
 def reset_form():
@@ -35,17 +36,12 @@ def select_product(event):
 
 def receive_data():
     try:
-        product = creat_products_and_validate(
-            id_number.get() ,
-            name.get() ,
-            brand.get() ,
-            quantity.get() ,
-            price.get() ,
-            expiration_date.get()
-        )
+        product = creat_products_and_validate(id_number.get(), name.get(), brand.get(), quantity.get(), price.get(),
+                                              expiration_date.get())
         product_list.append(product)
         print(product, "Product saved successfully.")
-        save_to_file(product_list)
+        # If you use Pickle
+        # save_to_file(product_list)
         print("-" * 150)
         #To insert Data into the table
         table.insert("" , END, values=tuple(product.values()))
@@ -62,10 +58,28 @@ def total_price():
         messagebox.showinfo("Total Price", f"Total : {calculate_total(product_list)}")
     except Exception as e:
         messagebox.showerror("Error", f"Error!!! : {e}")
-
-
-
-
+#_________________________________________________________________
+def save_click():
+    status , messaage = ProductController.save(
+        id.get(),
+        name.get(),
+        brand.get(),
+        quantity.get(),
+        price.get(),
+        expiration_date.get()
+    )
+    if status:
+        reset_form()
+        messagebox.showinfo("Saved.", "Something went wrong.")
+    else:
+        messagebox.showerror("Saving Error !!!!", "Something went wrong !")
+def edit_click():
+    pass
+def remove_click():
+    pass
+def find_all_click():
+    pass
+#---------------------------------------------------------------
 window = Tk()
 window.geometry("850x350")
 window.title("Product Management")
@@ -104,8 +118,12 @@ Entry(window, textvariable=expiration_date).place(x=180, y=220)
 
 # Buttons
 Button(window, text="Submit", command=receive_data).place(x=40, y=300, width=100)
+#--------------------------------------
+Button(window, text="Save to Market_List", command=remove_click).place(x=180, y=320)
 Button(window, text="Total", command=total_price).place(x=200, y=300, width=100)
-
+Button(window, text="Clear", command=remove_click).place(x=200, y=400, width=100)
+Button(window, text="Show Result", command=find_all_click).place(x=200, y=450, width=100)
+#----------------------------------------
 table  = ttk.Treeview(window , columns=(1,2,3,4,5,6) , height = 14 ,show = "headings")
 table.heading(1, text="ID")
 table.heading(2, text="Name")
